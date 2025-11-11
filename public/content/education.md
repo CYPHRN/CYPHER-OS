@@ -1,0 +1,3 @@
+# Education & Certifications
+
+[PLACEHOLDER]

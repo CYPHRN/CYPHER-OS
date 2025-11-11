@@ -1,0 +1,493 @@
+/* Desktop OS CV - Global Styles */
+
+/* Import Tailwind directives */
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+/* Custom dark variant for class-based dark mode */
+@custom-variant dark (&:is(.dark *));
+
+/* ============================================
+   THEME CONFIGURATION
+   CSS Variables for color system
+   ============================================ */
+
+@theme inline {
+  /* ===== Background Colors ===== */
+  --color-background-primary: #0d0d0d;
+  --color-background-secondary: #1a1a1a;
+  --color-background-pattern: #2a2a2a;
+
+  /* ===== Surface Colors (Windows, Navbar) ===== */
+  --color-surface: #2d3138;
+  --color-surface-elevated: #ffffff;
+  --color-surface-window: #f5f5f5;
+
+  /* ===== Accent Colors ===== */
+  --color-accent-primary: #f9ba15;
+  --color-accent-hover: #ffcd3c;
+  --color-accent-active: #e0a800;
+
+  /* ===== Text Colors ===== */
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #a0a0a0;
+  --color-text-muted: #6b6b6b;
+  --color-text-on-accent: #000000;
+  --color-text-on-surface: #1a1a1a;
+
+  /* ===== Border Colors ===== */
+  --color-border: #3a3a3a;
+  --color-border-light: #4a4a4a;
+  --color-border-window: #e0e0e0;
+
+  /* ===== System Colors ===== */
+  --color-success: #22c55e;
+  --color-error: #ef4444;
+  --color-warning: #f59e0b;
+  --color-info: #3b82f6;
+
+  /* ===== Radius ===== */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+
+  /* ===== Shadows ===== */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+  --shadow-window: 0 20px 25px -5px rgb(0 0 0 / 0.3);
+}
+
+/* ============================================
+   ROOT CSS VARIABLES
+   For compatibility with shadcn components
+   ============================================ */
+
+:root {
+  /* Background colors */
+  --background: 13 13 13; /* #0d0d0d */
+  --foreground: 255 255 255; /* #ffffff */
+
+  /* Card/Surface colors */
+  --card: 45 49 56; /* #2d3138 */
+  --card-foreground: 255 255 255;
+
+  /* Popover colors */
+  --popover: 45 49 56;
+  --popover-foreground: 255 255 255;
+
+  /* Primary accent (yellow) */
+  --primary: 42 80 5; /* #f9ba15 in HSL */
+  --primary-foreground: 0 0 0;
+
+  /* Secondary */
+  --secondary: 26 26 26;
+  --secondary-foreground: 255 255 255;
+
+  /* Muted */
+  --muted: 42 42 42;
+  --muted-foreground: 160 160 160;
+
+  /* Accent (using primary) */
+  --accent: 42 80 5;
+  --accent-foreground: 0 0 0;
+
+  /* Destructive (error) */
+  --destructive: 0 84 60;
+  --destructive-foreground: 255 255 255;
+
+  /* Border */
+  --border: 58 58 58;
+  --input: 58 58 58;
+  --ring: 42 80 5; /* Yellow focus ring */
+
+  /* Radius */
+  --radius: 0.5rem;
+}
+
+/* ============================================
+   BASE LAYER
+   Global element styling
+   ============================================ */
+
+@layer base {
+  /* Reset and base styles */
+  * {
+    @apply border-border;
+  }
+
+  html {
+    @apply antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  body {
+    @apply bg-[#0d0d0d] text-white;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+      "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+      "Helvetica Neue", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Headings */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-semibold text-white;
+  }
+
+  /* Links */
+  a {
+    @apply text-[#f9ba15] hover:text-[#ffcd3c] transition-colors;
+  }
+
+  /* Selection */
+  ::selection {
+    @apply bg-[#f9ba15] text-black;
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-[#1a1a1a];
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-[#3a3a3a] rounded-lg hover:bg-[#4a4a4a];
+  }
+}
+
+/* ============================================
+   HEXAGONAL PATTERN BACKGROUND
+   Geometric pattern overlay on desktop
+   ============================================ */
+
+.desktop-background {
+  position: relative;
+  background-color: #0d0d0d;
+}
+
+.desktop-background::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.4;
+  background-image: linear-gradient(
+      30deg,
+      #2a2a2a 12%,
+      transparent 12.5%,
+      transparent 87%,
+      #2a2a2a 87.5%,
+      #2a2a2a
+    ),
+    linear-gradient(
+      150deg,
+      #2a2a2a 12%,
+      transparent 12.5%,
+      transparent 87%,
+      #2a2a2a 87.5%,
+      #2a2a2a
+    ),
+    linear-gradient(
+      30deg,
+      #2a2a2a 12%,
+      transparent 12.5%,
+      transparent 87%,
+      #2a2a2a 87.5%,
+      #2a2a2a
+    ),
+    linear-gradient(
+      150deg,
+      #2a2a2a 12%,
+      transparent 12.5%,
+      transparent 87%,
+      #2a2a2a 87.5%,
+      #2a2a2a
+    ),
+    linear-gradient(
+      60deg,
+      #1a1a1a 25%,
+      transparent 25.5%,
+      transparent 75%,
+      #1a1a1a 75%,
+      #1a1a1a
+    ),
+    linear-gradient(
+      60deg,
+      #1a1a1a 25%,
+      transparent 25.5%,
+      transparent 75%,
+      #1a1a1a 75%,
+      #1a1a1a
+    );
+  background-size: 80px 140px;
+  background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
+  pointer-events: none;
+}
+
+/* ============================================
+   COMPONENT STYLES
+   Reusable component patterns
+   ============================================ */
+
+@layer components {
+  /* Window styling */
+  .window {
+    @apply bg-white rounded-lg shadow-lg border border-gray-200;
+    @apply flex flex-col overflow-hidden;
+  }
+
+  .window-titlebar {
+    @apply bg-[#2d3138] text-white px-4 py-2 flex items-center justify-between;
+    @apply cursor-move select-none;
+  }
+
+  .window-content {
+    @apply p-6 overflow-auto flex-1;
+  }
+
+  /* Desktop icon styling */
+  .desktop-icon {
+    @apply flex flex-col items-center gap-2 p-3 rounded-lg;
+    @apply cursor-pointer select-none;
+    @apply hover:bg-white/10 active:bg-white/20;
+    @apply transition-colors duration-150;
+  }
+
+  .desktop-icon-label {
+    @apply text-white text-sm text-center max-w-[80px] truncate;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+  }
+
+  /* Button styles */
+  .btn-primary {
+    @apply bg-[#f9ba15] text-black px-4 py-2 rounded-lg;
+    @apply hover:bg-[#ffcd3c] active:bg-[#e0a800];
+    @apply font-medium transition-colors duration-150;
+    @apply shadow-md;
+  }
+  .btn-secondary {
+    @apply bg-transparent text-white border border-white/20 px-4 py-2 rounded-lg;
+    @apply hover:bg-white/10 hover:border-white/40;
+    @apply transition-colors duration-150;
+  }
+  .btn-tert {
+    @apply bg-[#2d3138] text-[#f9ba15] border-2 border-[#f9ba15] px-4 py-2 rounded-lg;
+    @apply hover:bg-[#3a3a3a] hover:border-[#ffcd3c] hover:text-[#ffcd3c];
+    @apply active:bg-[#1a1a1a];
+    @apply font-medium transition-colors duration-150;
+  }
+}
+
+/* ============================================
+   UTILITY CLASSES
+   Helper classes for common patterns
+   ============================================ */
+
+@layer utilities {
+  /* Text shadows for readability on dark backgrounds */
+  .text-shadow-sm {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  }
+
+  .text-shadow-md {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+  }
+
+  .text-shadow-lg {
+    text-shadow: 0 4px 6px rgba(0, 0, 0, 0.7);
+  }
+
+  /* Backdrop blur utilities */
+  .backdrop-blur-subtle {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  /* Animated gradient background (for loading states) */
+  .animated-gradient {
+    background: linear-gradient(90deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%);
+    background-size: 200% 100%;
+    animation: gradient-shift 2s ease-in-out infinite;
+  }
+
+  @keyframes gradient-shift {
+    0%,
+    100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+}
+
+@keyframes pulse-grid {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Desktop Background Styles */
+
+/* Option 1: Hexagon Pattern (Current) */
+.bg-hexagon {
+  background: #0a0a0a;
+  background-image: linear-gradient(
+      45deg,
+      transparent 40%,
+      rgba(249, 186, 21, 0.03) 40%,
+      rgba(249, 186, 21, 0.03) 60%,
+      transparent 60%
+    ),
+    linear-gradient(
+      -45deg,
+      transparent 40%,
+      rgba(45, 49, 56, 0.3) 40%,
+      rgba(45, 49, 56, 0.3) 60%,
+      transparent 60%
+    ),
+    linear-gradient(90deg, #0d0d0d 0%, #1a1a1a 50%, #0d0d0d 100%);
+  background-size: 400px 400px, 400px 400px, 100% 100%;
+  background-position: 0 0, 200px 200px, 0 0;
+}
+
+/* Option 2: Abstract Brush Strokes - Red/Orange Artsy */
+.bg-abstract {
+  background: #0a0a0a;
+  background-image: 
+    /* Top right stroke */ linear-gradient(
+      125deg,
+      transparent 0%,
+      transparent 35%,
+      rgba(220, 38, 38, 0.15) 35%,
+      rgba(220, 38, 38, 0.08) 45%,
+      transparent 45%
+    ),
+    /* Center-right stroke */
+      linear-gradient(
+        -30deg,
+        transparent 0%,
+        transparent 55%,
+        rgba(249, 115, 22, 0.12) 55%,
+        rgba(249, 115, 22, 0.05) 68%,
+        transparent 68%
+      ),
+    /* Top-left stroke */
+      linear-gradient(
+        85deg,
+        transparent 0%,
+        transparent 20%,
+        rgba(239, 68, 68, 0.1) 20%,
+        rgba(239, 68, 68, 0.04) 32%,
+        transparent 32%
+      ),
+    /* Bottom-right stroke */
+      linear-gradient(
+        -60deg,
+        transparent 0%,
+        transparent 70%,
+        rgba(251, 146, 60, 0.14) 70%,
+        rgba(251, 146, 60, 0.06) 85%,
+        transparent 85%
+      ),
+    /* Center stroke */
+      linear-gradient(
+        160deg,
+        transparent 0%,
+        transparent 40%,
+        rgba(220, 38, 38, 0.08) 40%,
+        rgba(220, 38, 38, 0.03) 52%,
+        transparent 52%
+      ),
+    /* NEW: Bottom-left stroke */
+      linear-gradient(
+        45deg,
+        transparent 0%,
+        transparent 10%,
+        rgba(239, 68, 68, 0.12) 10%,
+        rgba(239, 68, 68, 0.05) 25%,
+        transparent 25%
+      ),
+    /* NEW: Bottom-center stroke */
+      linear-gradient(
+        -45deg,
+        transparent 0%,
+        transparent 15%,
+        rgba(249, 115, 22, 0.1) 15%,
+        rgba(249, 115, 22, 0.04) 28%,
+        transparent 28%
+      ),
+    /* Radial glow */
+      radial-gradient(
+        ellipse at 30% 60%,
+        rgba(249, 115, 22, 0.05) 0%,
+        transparent 50%
+      ),
+    /* Base gradient */
+      linear-gradient(180deg, #0d0d0d 0%, #0a0a0a 50%, #0d0d0d 100%);
+  background-size: 800px 600px, 900px 700px, 600px 400px, 1000px 800px,
+    700px 500px, 650px 550px, 750px 600px, 800px 800px, 100% 100%;
+  background-position: 20% 30%, 70% 60%, 40% 80%, 85% 20%, 10% 70%, 5% 95%,
+    45% 90%, 30% 60%, 0 0;
+}
+
+/* Option 3: Minimal - Gradient with Subtle Wave Overlay */
+.bg-minimal {
+  background: #0a0a0a;
+  background-image: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 80px,
+      rgba(255, 255, 255, 0.01) 80px,
+      rgba(255, 255, 255, 0.01) 160px
+    ),
+    linear-gradient(135deg, #0a0a0a 0%, #121212 50%, #0a0a0a 100%);
+  background-size: 100% 160px, 100% 100%;
+}
+
+/* Cursor Styles */
+.cursor-default {
+  cursor: default;
+}
+
+.cursor-large {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Cpath d='M8 2 L8 36 L16 28 L20 42 L26 40 L22 26 L32 26 Z' fill='white' stroke='black' stroke-width='2'/%3E%3C/svg%3E"),
+    auto;
+}
+
+.cursor-large * {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Cpath d='M8 2 L8 36 L16 28 L20 42 L26 40 L22 26 L32 26 Z' fill='white' stroke='black' stroke-width='2'/%3E%3C/svg%3E"),
+    auto !important;
+}
+
+.cursor-funny {
+  cursor: url("/funny-cursor.png"), auto;
+}
+
+.cursor-funny * {
+  cursor: url("/funny-cursor.png"), auto !important;
+}
+
+@layer utilities {
+  .text-2xs {
+    font-size: 0.665rem;
+    line-height: 0.875rem;
+  }
+}
