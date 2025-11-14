@@ -100,8 +100,6 @@ amt-cv/
 ├── src/
 │   ├── app/
 │   │   ├── actions/               # Server actions
-│   │   ├── api/
-│   │   │   └── contact/           # Contact form API
 │   │   ├── hooks/
 │   │   │   ├── windowManager/     # Window management modules
 │   │   │   ├── useWindowManager.ts
